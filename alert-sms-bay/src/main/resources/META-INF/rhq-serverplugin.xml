@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<alert-plugin
+        name="alert-sms-bay"
+        displayName="Alert:SMS-Bay"
+        xmlns="urn:xmlns:rhq-serverplugin.alert"
+        xmlns:c="urn:xmlns:rhq-configuration"
+        xmlns:serverplugin="urn:xmlns:rhq-serverplugin"
+        package="net.krungsri.jon.plugin.server.alert"
+        description="Alert sender plugin that sends alert notifications via SMS"
+        
+        >
+
+    <serverplugin:help>
+        This alert sender plugin is used to send notifications via SMS. 
+    </serverplugin:help>
+
+
+    <!-- Global preferences for all sms alerts -->
+    <serverplugin:plugin-configuration>
+        <c:simple-property name="targetIp" type="string" description="Target IP Address" default="10.101.32.240" required="true"/>
+        <c:simple-property name="targetPort" type="integer" description="Target Port" default="162" required="true"/>
+        <c:simple-property name="timeout" type="integer" description="Timeout" default="1500" required="true"/>
+        <c:simple-property name="oid" type="string" description="OID"  default=".83.105.116.101.115.99.111.112.101.1" required="true"/>
+        <c:simple-property name="community" description="Community" default="public">
+            <c:property-options>
+                <c:option value="public"/>
+             </c:property-options>
+        </c:simple-property>
+
+    </serverplugin:plugin-configuration>
+
+    <short-name>SMS-CUSTOM</short-name>
+    <plugin-class>SmsSender</plugin-class>
+
+    <alert-configuration>
+        <c:simple-property name="tel" type="string" description="Telephone number to send SMS to (comma separate for multiple number)"/>
+        <c:simple-property name="message" type="string" description="Message"/>
+    </alert-configuration>
+
+</alert-plugin>
